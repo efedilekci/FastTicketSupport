@@ -7,7 +7,7 @@ export default function Home() {
       <div className="px-4 py-6">
         <h1 className="text-sm font-medium">Dashboard</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Het systeem is opgezet. Het rooster volgt hier.
+          Komt nog
         </p>
       </div>
     </main>

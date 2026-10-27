@@ -7,7 +7,7 @@ const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "FastTicketSupport",
-  description: "Rooster-dashboard voor diensten en medewerkers.",
+  description: "Komt nog.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
