@@ -16,6 +16,9 @@ import Link from "next/link";
 import { AiChat, OpenChatButton } from "@/components/home/ai-chat";
 import { HomeNav } from "@/components/home/home-nav";
 import { SmoothScroll } from "@/components/home/smooth-scroll";
+import { currentUserController } from "@/server/controllers/auth.controller";
+
+export const instant = false;
 
 const categories: { title: string; text: string; icon: LucideIcon }[] = [
   {
@@ -113,11 +116,13 @@ const primaryButton =
 const secondaryButton =
   "inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-5 py-3 text-sm font-medium text-foreground shadow-sm transition hover:border-gold-ink";
 
-export default function Home() {
+export default async function Home() {
+  const user = await currentUserController();
+
   return (
     <div className="flex-1 bg-background text-foreground">
       <SmoothScroll />
-      <HomeNav />
+      <HomeNav isAuthenticated={Boolean(user)} />
       <main>
         <section className="px-5 py-16 sm:px-8 sm:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-16">

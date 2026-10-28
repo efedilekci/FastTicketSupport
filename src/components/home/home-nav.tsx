@@ -11,7 +11,7 @@ const links = [
   { href: "#veelgestelde-vragen", label: "Veelgestelde vragen" },
 ];
 
-export function HomeNav() {
+export function HomeNav({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -43,17 +43,43 @@ export function HomeNav() {
               {link.label}
             </a>
           ))}
+          {isAuthenticated ? (
+            <Link
+              href="/dashboard"
+              className="rounded-lg px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-gold-ink lg:hidden"
+              onClick={() => setOpen(false)}
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              href="/inloggen"
+              className="rounded-lg px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-gold-ink lg:hidden"
+              onClick={() => setOpen(false)}
+            >
+              Inloggen
+            </Link>
+          )}
         </div>
 
         <div className="flex items-center gap-2">
+          {isAuthenticated ? (
+            <Link
+              href="/dashboard"
+              className="hidden rounded-lg border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:border-gold-ink sm:inline-flex"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              href="/inloggen"
+              className="hidden rounded-lg border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:border-gold-ink sm:inline-flex"
+            >
+              Inloggen
+            </Link>
+          )}
           <Link
-            href="/inloggen"
-            className="hidden rounded-lg border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:border-gold-ink sm:inline-flex"
-          >
-            Inloggen
-          </Link>
-          <Link
-            href="/inloggen"
+            href={isAuthenticated ? "/dashboard" : "/inloggen"}
             className="inline-flex shrink-0 rounded-lg bg-primary px-3 py-2 text-sm font-medium whitespace-nowrap text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Ticket aanmaken
