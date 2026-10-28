@@ -2,7 +2,6 @@
 
 import {
   LayoutDashboard,
-  LogOut,
   Settings,
   Sparkles,
   Ticket,
@@ -11,7 +10,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { logoutAction } from "@/app/actions/auth";
+import { NavUser } from "@/components/layout/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -52,19 +51,12 @@ export function AppSidebar({ user }: { user: PublicUser }) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
-              size="lg"
               render={<Link href="/dashboard" />}
               tooltip="FastTicketSupport"
+              className="bg-sidebar-primary text-gold hover:bg-sidebar-primary hover:text-gold data-active:bg-sidebar-primary data-active:text-gold"
             >
-              <span className="grid size-8 place-items-center rounded-lg bg-sidebar-primary text-gold">
-                <Sparkles className="size-4" aria-hidden="true" />
-              </span>
-              <span className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">FastTicketSupport</span>
-                <span className="truncate text-xs text-muted-foreground">
-                  Support
-                </span>
-              </span>
+              <Sparkles />
+              <span>FastTicketSupport</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -116,28 +108,7 @@ export function AppSidebar({ user }: { user: PublicUser }) {
       </SidebarContent>
 
       <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton tooltip={user.name} className="pointer-events-none">
-              <span className="grid size-7 place-items-center rounded-full bg-sidebar-accent text-xs font-medium">
-                {user.name.slice(0, 1).toUpperCase()}
-              </span>
-              <span className="truncate">{user.name}</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <form action={logoutAction}>
-              <SidebarMenuButton
-                type="submit"
-                tooltip="Uitloggen"
-                className="w-full"
-              >
-                <LogOut />
-                <span>Uitloggen</span>
-              </SidebarMenuButton>
-            </form>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <NavUser user={user} />
       </SidebarFooter>
 
       <SidebarRail />
